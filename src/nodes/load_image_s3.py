@@ -24,7 +24,8 @@ class LoadImageS3:
     FUNCTION = "load_image"
     
     def load_image(self, image):
-        s3_path = os.path.join(os.getenv("S3_INPUT_DIR"), image)
+        # s3_path = os.path.join(os.getenv("S3_INPUT_DIR"), image.replace("/", ""))
+        s3_path = f"{os.getenv("S3_INPUT_DIR")}{image}"
         image_path = S3_INSTANCE.download_file(s3_path=s3_path, local_path=f"input/{image}")
         
         img = Image.open(image_path)
